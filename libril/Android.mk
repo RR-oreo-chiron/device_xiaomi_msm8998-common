@@ -1,6 +1,6 @@
 # Copyright 2006 The Android Open Source Project
 
-ifneq ($(BOARD_PROVIDES_LIBRIL),true)
+ifeq ($(BOARD_PROVIDES_LIBRIL),true)
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
@@ -38,8 +38,8 @@ ifeq ($(SIM_COUNT), 2)
 endif
 
 LOCAL_C_INCLUDES += external/nanopb-c
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../include
-LOCAL_EXPORT_C_INCLUDE_DIRS := $(LOCAL_PATH)/../include
+LOCAL_C_INCLUDES += hardware/ril/include
+LOCAL_EXPORT_C_INCLUDE_DIRS := hardware/ril-caf/include
 
 LOCAL_MODULE:= libril
 LOCAL_CLANG := true
