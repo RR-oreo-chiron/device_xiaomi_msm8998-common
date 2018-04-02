@@ -9,7 +9,6 @@ type debugfs_msm_core, debugfs_type, fs_type;
 type debugfs_rmt, debugfs_type, fs_type;
 
 type perfd_socket, file_type;
-type debugfs_rpm, debugfs_type, fs_type;
 type debugfs_wlan, debugfs_type, fs_type;
 
 type thermal_data_file, file_type;
@@ -28,5 +27,8 @@ type debugfs_wifi, debugfs_type, file_type;
 
 type nv_mac_persist_file, file_type;
 type nv_mac_data_file, file_type;
+
+type persist_amp_cal_file, file_type;
+type persist_usf_cal_file, file_type;
 
 type debugfs_mem, debugfs_type, fs_type;

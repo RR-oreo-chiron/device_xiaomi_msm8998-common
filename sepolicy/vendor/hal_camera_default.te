@@ -20,7 +20,6 @@ allow hal_camera_default media_rw_data_file:file { open read getattr };
 allow hal_camera_default storage_file:dir { search };
 
 allow hal_camera_default persist_file:file read;
-allow hal_camera_default serialno_prop:file { open read getattr };
 
 allow hal_camera_default debug_prop:file { read open getattr };
 allow hal_camera_default nfc_data_file:dir search;

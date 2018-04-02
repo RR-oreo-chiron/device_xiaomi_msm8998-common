@@ -24,21 +24,31 @@ $(call inherit-product, vendor/xiaomi/msm8998-common/msm8998-common-vendor.mk)
 # HIDL
 $(call inherit-product, device/xiaomi/msm8998-common/hidl.mk)
 
-$(call inherit-product, vendor/omni/config/phone-xxhdpi-4096-dalvik-heap.mk)
+# Dalvik
+ PRODUCT_PROPERTY_OVERRIDES += \
+     dalvik.vm.heapstartsize=16m \
+     dalvik.vm.heapgrowthlimit=256m \
+     dalvik.vm.heapsize=512m \
+     dalvik.vm.heaptargetutilization=0.75 \
+     dalvik.vm.heapminfree=4m \
+     dalvik.vm.heapmaxfree=8m
+
+# HWUI
+PRODUCT_PROPERTY_OVERRIDES += \
+     ro.hwui.texture_cache_size=96 \
+     ro.hwui.layer_cache_size=64 \
+     ro.hwui.r_buffer_cache_size=12 \
+     ro.hwui.path_cache_size=39 \
+     ro.hwui.gradient_cache_size=1 \
+     ro.hwui.drop_shadow_cache_size=7 \
+     ro.hwui.texture_cache_flushrate=0.4 \
+     ro.hwui.text_small_cache_width=2048 \
+     ro.hwui.text_small_cache_height=2048 \
+     ro.hwui.text_large_cache_width=3072 \
+     ro.hwui.text_large_cache_height=4096
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-PRODUCT_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
-
-PRODUCT_PACKAGES += \
-    omni_charger_res_images
-
-# Live Wallpapers
-PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    librs_jni
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -81,9 +91,18 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.nxp.mifare.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
 
+PRODUCT_ENFORCE_RRO_TARGETS := \
+    framework-res
+
 # Device uses high-density artwork where available
 PRODUCT_AAPT_CONFIG := xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 1920
+TARGET_SCREEN_WIDTH := 1080
+
+# Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
 # Audio
@@ -136,7 +155,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    SnapdragonCamera2 \
+    Snap \
     libshim_MiCamera
 
 # Connectivity Engine support (CNE)
@@ -180,11 +199,12 @@ PRODUCT_PACKAGES += \
     libvehiclenetwork-native
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/gps/flp.conf:system/vendor/etc/flp.conf \
-    $(LOCAL_PATH)/configs/gps/izat.conf:system/vendor/etc/izat.conf \
-    $(LOCAL_PATH)/configs/gps/lowi.conf:system/vendor/etc/lowi.conf \
-    $(LOCAL_PATH)/configs/gps/sap.conf:system/vendor/etc/sap.conf \
-    $(LOCAL_PATH)/configs/gps/xtwifi.conf:system/vendor/etc/xtwifi.conf
+    $(LOCAL_PATH)/configs/gps/flp.conf:$(TARGET_COPY_OUT_VENDOR)/etc/flp.conf \
+    $(LOCAL_PATH)/configs/gps/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf \
+    $(LOCAL_PATH)/configs/gps/izat.conf:$(TARGET_COPY_OUT_VENDOR)/etc/izat.conf \
+    $(LOCAL_PATH)/configs/gps/lowi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/lowi.conf \
+    $(LOCAL_PATH)/configs/gps/sap.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sap.conf \
+    $(LOCAL_PATH)/configs/gps/xtwifi.conf:$(TARGET_COPY_OUT_VENDOR)/etc/xtwifi.conf
 
 # IMS
 PRODUCT_PACKAGES += \
@@ -272,6 +292,11 @@ PRODUCT_PACKAGES += \
     libOmxVdec \
     libOmxVenc \
     libstagefrighthw
+
+# Perfbootconfig and powerhint
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/perfboostsconfig.xml:$(TARGET_COPY_OUT_VENDOR)/etc/perf/perfboostsconfig.xml \
+    $(LOCAL_PATH)/configs/powerhint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/powerhint.xml
 
 # Privapp Whitelist and Low power Whitelist
 PRODUCT_COPY_FILES += \
