@@ -5,3 +5,4 @@ allow surfaceflinger hal_perf_hwservice:hwservice_manager find;
 allow surfaceflinger perfd_socket:sock_file write;
 #neverallow
 dontaudit surfaceflinger hal_display_config_hwservice:hwservice_manager add;
+allow surfaceflinger perfd:unix_stream_socket connectto;
