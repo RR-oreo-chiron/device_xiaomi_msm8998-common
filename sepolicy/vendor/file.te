@@ -28,7 +28,4 @@ type debugfs_wifi, debugfs_type, file_type;
 type nv_mac_persist_file, file_type;
 type nv_mac_data_file, file_type;
 
-type persist_amp_cal_file, file_type;
-type persist_usf_cal_file, file_type;
-
 type debugfs_mem, debugfs_type, fs_type;

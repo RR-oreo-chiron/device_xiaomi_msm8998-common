@@ -157,6 +157,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Snap \
     libshim_MiCamera
+    
+LOCAL_OVERRIDES_PACKAGES := SnapdragonCamera Snap Camera2
 
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \

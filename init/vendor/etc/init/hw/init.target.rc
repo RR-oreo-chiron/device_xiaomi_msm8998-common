@@ -36,7 +36,6 @@ on early-init
     write /proc/sys/kernel/sched_boost 1
 
 on init
-    export LD_SHIM_LIBS /system/lib/libMiCameraHal.so|libshim_MiCamera.so
     # Goodix fingerprint
     chown system system /dev/goodix_fp
 
@@ -118,10 +117,10 @@ on post-fs
     insmod /vendor/lib/modules/exfat.ko
 
 #    service system_loggy /system/bin/logcat -b all -v threadtime -D -f /cache/logcat.log
-#    service system_loggy /system/bin/logcat -f /cache/logcat.log
-#        class main  class main
-#        user root   user root
-#        oneshot oneshot
+#service system_loggy /system/bin/logcat -f /cache/logcat.log
+#    class main  class main
+#    user root   user root
+#    oneshot oneshot
 
 # OTG support
 on property:persist.sys.oem.otg_support=true
