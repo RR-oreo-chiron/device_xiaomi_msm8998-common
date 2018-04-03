@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 The CyanogenMod Project
+ * Copyright (c) 2016 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,20 @@
  * limitations under the License.
  */
 
-#ifndef _QCOM_POWER_FEATURE_H
-#define _QCOM_POWER_FEATURE_H
+#ifndef SAP_SERVICE_H
+#define SAP_SERVICE_H
 
-#include <hardware/power.h>
+#include <telephony/ril.h>
+#include <ril_internal.h>
+#include <RilSapSocket.h>
+#include <hardware/ril/librilutils/proto/sap-api.pb.h>
 
-void set_device_specific_feature(feature_t feature, int state);
+namespace sap {
 
-#endif
+void registerService(RIL_RadioFunctions *callbacks);
+void processResponse(MsgHeader *rsp, RilSapSocket *sapSocket);
+void processUnsolResponse(MsgHeader *rsp, RilSapSocket *sapSocket);
+
+}   // namespace android
+
+#endif  // RIL_SERVICE_H

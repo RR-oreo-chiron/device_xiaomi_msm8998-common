@@ -14,54 +14,38 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "android.hardware.power@1.1-service.msm8998"
+#define LOG_TAG "android.hardware.biometrics.fingerprint@2.1-service.msm8998"
 
 #include <android/log.h>
 #include <hidl/HidlTransportSupport.h>
-#include <hardware/power.h>
-#include "Power.h"
 
-using android::sp;
-using android::status_t;
-using android::OK;
+#include "BiometricsFingerprint.h"
 
 // libhwbinder:
 using android::hardware::configureRpcThreadpool;
 using android::hardware::joinRpcThreadpool;
 
 // Generated HIDL files
-using android::hardware::power::V1_1::IPower;
-using android::hardware::power::V1_1::implementation::Power;
+using android::hardware::biometrics::fingerprint::V2_1::IBiometricsFingerprint;
+using android::hardware::biometrics::fingerprint::V2_1::implementation::BiometricsFingerprint;
 
 int main() {
+    android::sp<IBiometricsFingerprint> service = BiometricsFingerprint::getInstance();
 
-    status_t status;
-    android::sp<IPower> service = nullptr;
-
-    ALOGI("Power HAL Service 1.1 is starting.");
-
-    service = new Power();
     if (service == nullptr) {
-        ALOGE("Can not create an instance of Power HAL Iface, exiting.");
-
-        goto shutdown;
+        ALOGE("Instance of BiometricsFingerprint is null");
+        return 1;
     }
 
     configureRpcThreadpool(1, true /*callerWillJoin*/);
 
-    status = service->registerAsService();
-    if (status != OK) {
-        ALOGE("Could not register service for Power HAL Iface (%d).", status);
-        goto shutdown;
+    android::status_t status = service->registerAsService();
+    if (status != android::OK) {
+        ALOGE("Cannot register BiometricsFingerprint service");
+        return 1;
     }
 
-    ALOGI("Power Service is ready");
     joinRpcThreadpool();
-    //Should not pass this line
 
-shutdown:
-    // In normal operation, we don't expect the thread pool to exit
-
-    ALOGE("Power Service is shutting down");
-    return 1;
+    return 0; // should never get here
 }
