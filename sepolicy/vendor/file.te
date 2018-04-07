@@ -29,3 +29,6 @@ type nv_mac_persist_file, file_type;
 type nv_mac_data_file, file_type;
 
 type debugfs_mem, debugfs_type, fs_type;
+
+# vmstat
+type proc_vmstat, fs_type;

@@ -6,4 +6,4 @@ allow zygote self:capability sys_nice;
 allow zygote debug_prop:file read;
 
 allow zygote dalvikcache_data_file:file execute;
-allow zygote vendor_app_file:dir read;
+allow zygote vendor_app_file:dir { read open };

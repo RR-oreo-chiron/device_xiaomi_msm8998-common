@@ -2,3 +2,5 @@ set_prop(audioserver, debug_prop);
 
 # Callbacks in response to rild IPC into audioserver
 binder_call(audioserver, rild)
+
+allow audioserver hal_sensors_default:binder call;

@@ -5,3 +5,4 @@ genfscon proc /tri-state-key  u:object_r:proc_touchpanel:s0
 genfscon proc /fingerprint    u:object_r:proc_fingerprint:s0
 
 genfscon debugfs /wlan0                               u:object_r:debugfs_wlan:s0
+genfscon proc /vmstat                                 u:object_r:proc_vmstat:s0

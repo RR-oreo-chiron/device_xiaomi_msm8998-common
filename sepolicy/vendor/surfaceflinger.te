@@ -6,3 +6,4 @@ allow surfaceflinger perfd_socket:sock_file write;
 #neverallow
 dontaudit surfaceflinger hal_display_config_hwservice:hwservice_manager add;
 allow surfaceflinger perfd:unix_stream_socket connectto;
+allow surfaceflinger hal_graphics_mapper_hwservice:hwservice_manager find;
