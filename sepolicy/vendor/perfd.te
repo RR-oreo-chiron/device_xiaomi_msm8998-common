@@ -45,3 +45,4 @@ allow perfd sysfs_msm_power:dir search;
 allow perfd sysfs_scsi_host:file write;
 allow perfd sysfs_msm_power:file { write open getattr };
 allow perfd mpctl_data_file:dir { search write add_name create };
+allow perfd surfaceflinger:process signull;

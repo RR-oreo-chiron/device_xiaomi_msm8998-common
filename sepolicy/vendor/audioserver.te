@@ -4,3 +4,4 @@ set_prop(audioserver, debug_prop);
 binder_call(audioserver, rild)
 
 allow audioserver hal_sensors_default:binder call;
+allow audioserver unlabeled:file { read open getattr };
